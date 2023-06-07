@@ -4,9 +4,21 @@ import android.util.Log
 import javax.inject.Inject
 
 private const val TAG = "UserRepoo"
-class UserRepo @Inject constructor(val loggerService: LoggerService) {
+
+interface UserRepo{
     fun saveUser(name:String,password:String)
+}
+class SqlRepo  : UserRepo{
+    override fun saveUser(name:String,password:String)
     {
-        loggerService.log("User saved in d  b")
+        Log.d(TAG, "User saved in db")
     }
+}
+
+class FirebaseRepo : UserRepo
+{
+    override fun saveUser(name: String, password: String) {
+        Log.d(TAG, "User saved in firebase")
+    }
+
 }
